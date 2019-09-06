@@ -65,7 +65,7 @@ func readAndReplace(fileName string) string {
 			osVar, found := os.LookupEnv(varName)
 			if found {
 				line = strings.Replace(result[0], result[1], osVar, -1)
-				log.Printf("Replacing variable '%s' with value '%s'\n", result[1], osVar)
+				log.Printf("Replacing placeholder '%s' with environment variable\n", result[1])
 			} else {
 				log.Printf("Environment variable '%s' was not set or empty\n", result[1])
 			}

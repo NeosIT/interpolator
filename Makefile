@@ -8,6 +8,7 @@ deps:
 
 build:
 	go build -o $(EXECUTABLE)
+	strip $(EXECUTABLE)
 
 clean:
 	go clean
