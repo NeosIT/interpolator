@@ -1,4 +1,5 @@
-DOCKER_TAG=neosit/interpolator:latest
+IMAGE=neosit/interpolator
+TAG=0.9.0
 EXECUTABLE=interpolator
 
 all: deps build docker-build
@@ -8,13 +9,16 @@ deps:
 
 build:
 	go build -o $(EXECUTABLE)
+	strip $(EXECUTABLE)
 
 clean:
 	go clean
 	rm -rf vendor $(EXECUTABLE)
 
 docker-build:
-	docker build --no-cache -t $(DOCKER_TAG) .
+	docker build --no-cache -t ${IMAGE}:${TAG} .
 
 docker-push:
-	docker push  $(DOCKER_TAG)
+	docker tag ${IMAGE}:${TAG} ${IMAGE}:latest
+	docker push ${IMAGE}:${TAG}
+	docker push ${IMAGE}:latest
