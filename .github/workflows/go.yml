@@ -35,4 +35,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: interpolator
-        path: ../go/src/github.com/interpolator/interpolator
+        path: ../../go/src/github.com/interpolator/interpolator
