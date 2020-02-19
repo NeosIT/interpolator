@@ -18,6 +18,7 @@ jobs:
 
     - name: Get dependencies
       run: |
+        curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
         make deps
 
     - name: Build
