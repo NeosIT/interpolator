@@ -30,6 +30,7 @@ jobs:
         curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
         make deps
         make build
+        pwd
     
     - name: Upload artifact
       uses: actions/upload-artifact@v1
