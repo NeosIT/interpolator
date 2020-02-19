@@ -16,7 +16,7 @@ jobs:
     - name: Check out code into the Go module directory
       uses: actions/checkout@v2
 
-    - name: Get dependencies
+    - name: Checkout dependencies and build
       run: |
         export GOPATH=$HOME/go
         export GOBIN=$(go env GOPATH)/bin
@@ -29,8 +29,4 @@ jobs:
         cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
         curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
         make deps
-
-    - name: Build
-      run: |
-        cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
         make build
