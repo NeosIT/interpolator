@@ -2,10 +2,7 @@ IMAGE=neosit/interpolator
 TAG=0.9.0
 EXECUTABLE=interpolator
 
-all: deps build docker-build
-
-deps:
-	dep ensure
+all: build docker-build
 
 build:
 	go build -o $(EXECUTABLE)
