@@ -1,0 +1,39 @@
+name: Go
+on: [push]
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Set up Go 1.13
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.13
+      id: go
+    
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v2
+
+    - name: Checkout dependencies and build
+      run: |
+        export GOPATH=$HOME/go
+        export GOBIN=$(go env GOPATH)/bin
+        export PATH=$PATH:$GOPATH
+        export PATH=$PATH:$GOBIN
+        mkdir -p $GOPATH/pkg
+        mkdir -p $GOBIN
+        mkdir -p $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        mv $(pwd)/* $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+        make deps
+        make build
+        pwd
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: interpolator
+        path: ../../../go/src/github.com/NeosIT/interpolator/interpolator
